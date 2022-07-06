@@ -1,34 +1,29 @@
 import dns.resolver
-import sys, getopt
+import sys
 
 def resolver_query_a(name, query):
-    result = dns.resolver.resolve(name, query)
-    for ipval in result:
-        result = print("{}".format(ipval.to_text()))
-    return result
-
-def resolver_query_all(name, all):
-    result = dns.resolver.resolve(name, all)
+    try:
+        result = dns.resolver.resolve(name, query)
+        pass
+        for ipval in result:
+            result = print("{} Record Lookup : {}".format(query,ipval.to_text()))
+        return result
+    except:
+        print("{} Record Lookup not found".format(query))
+        pass
 
 def main(argv):
-    dns_name = ''
-    dns_zone = ''
-    try:
-        opts, args = getopt.getopt(argv, 'd:q:')
-    except getopt.GetoptError:
-        print ("usage: python sheriff -d <dns_name> -q <dns_zone>")
-        sys.exit(2)
-    for opt, arg in opts:
-        if opt == '-h':
-            print ("usage: python sheriff -d <dns_name> -q <dns_zone>")
-            sys.exit()
-        elif opt in ("-d", "--dns_name"):
-            dns_name = arg
-        elif opt in ("-q", "--dns_zone"):
-            dns_zone = arg
+    if len (sys.argv) != 2:
+        print("Usage: python example.com")
+        sys.exit(1)
+    dns_name = str(sys.argv[1])
+    dns_zone = ""
+    dns_all_zones = ["A", "MX", "NS", "SOA", "TXT"]
 
-    insert_at_resolver_func = resolver_query_a(dns_name, dns_zone)
-    
+    for item in dns_all_zones:
+        dns_zone = item
+        resolver_query_a(dns_name, dns_zone)
+
 if __name__ == "__main__":
     main(sys.argv[1:])
     

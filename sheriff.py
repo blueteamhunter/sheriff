@@ -32,7 +32,6 @@ def main(argv):
         print("Usage: python example.com")
         sys.exit(1)
     dns_name = str(sys.argv[1])
-    dns_name = ""
     dns_zone = ""
     dns_all_zones = ["A", "MX", "NS", "SOA", "TXT"]
 

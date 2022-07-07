@@ -15,10 +15,10 @@ def resolver_query_a(name, query):
     
 def dns_zone_transfer(address):
     print ("\n[*] Atempting zone transfer [*]\n")
-    dns_ns_awnswer = dns.resolver.resolve(address, 'NS')
-    for server in dns_ns_awnswer:
-        dns_ns_awnswer = dns.resolver.resolve(address, 'A')
-        for ip in dns_ns_awnswer:
+    ns_response = dns.resolver.resolve(address, 'NS')
+    for server in ns_response:
+        ip_check = dns.resolver.resolve(server.target, 'A')
+        for ip in ip_check:
             try:
                 zone = dns.zone.from_xrf(dns.query.xfr(str(ip), address))
                 for host in zone:

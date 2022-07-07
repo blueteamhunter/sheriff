@@ -1,3 +1,5 @@
+#!/usr/bin/env python3
+
 import dns.resolver
 import dns.zone
 import sys
@@ -12,7 +14,7 @@ def resolver_query_a(name, query):
     except:
         print("{} Record Lookup not found".format(query))
         pass
-    
+
 def dns_zone_transfer(address):
     print ("\n[*] Atempting zone transfer [*]\n")
     ns_response = dns.resolver.resolve(address, 'NS')
@@ -38,7 +40,7 @@ def main(argv):
     for item in dns_all_zones:
         dns_zone = item
         resolver_query_a(dns_name, dns_zone)
-        
+
     dns_zone_transfer(dns_name)
 
 if __name__ == "__main__":

@@ -1,19 +1,19 @@
 #!/usr/bin/env python3
 
+import sys
+
 import dns.resolver
 import dns.zone
-import sys
+
 
 def resolver_query_a(name, query):
     try:
         result = dns.resolver.resolve(name, query)
-        pass
         for ipval in result:
             result = print("{} Record Lookup : {}".format(query,ipval.to_text()))
-        return result
     except:
         print("{} Record Lookup not found".format(query))
-        pass
+
 
 def dns_zone_transfer(address):
     print ("\n[*] Atempting zone transfer [*]\n")
@@ -28,6 +28,7 @@ def dns_zone_transfer(address):
             except Exception as e:
                 print("[*] NS {} is refusing zone transfer!".format(server))
                 continue
+
 
 def main(argv):
     if len (sys.argv) != 2:

@@ -1,6 +1,6 @@
 # sheriff
 A simple DNS resolution tool
-Currently supporting the following record lookup:
+Currently supporting zone transfer attemps and the following record lookup:
 
 A Record Lookup
  - Address or IPv4 DNS records, these store IP addresses for domain names.
